@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -25,10 +25,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: npm install
+      run: yarn install --frozen-lockfile --silent
+      env:
+        CI: true
 
     - name: Run the tests and generate coverage report
-      run: npm test -- --coverage
+      run: yarn test
+      env:
+        CI: true
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
