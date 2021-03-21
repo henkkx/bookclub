@@ -16,7 +16,7 @@
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "test:e2e": "start-server-and-test dev http://localhost:3000/ cy:open",
-    "test:e2e:run": "start-server-and-test start-prod-server http://localhost:8080/ cy:run",
+    "test:e2e:run": "start-server-and-test start-prod-server http://localhost:3000/ cy:run",
     "serve": "serve --no-clipboard --single --listen 8811 build",
     "format": "prettier --write \"**/*.+(js|ts|tsx|json|css|md|mdx|html)\""
   },
