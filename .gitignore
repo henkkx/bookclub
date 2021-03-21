@@ -39,6 +39,8 @@ pids
 *.lcov
 .nyc_output
 lib-cov
+cypress/videos
+cypress/screenshots
 
 # Caches
 *.tsbuildinfo

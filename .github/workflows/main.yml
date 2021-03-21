@@ -2,13 +2,12 @@ name: bookclub
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
     services:
       # Label used to access the service container
@@ -36,24 +35,23 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile --silent
-      env:
-        CI: true
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --silent
+        env:
+          CI: true
 
-    - name: Run the tests and generate coverage report
-      run: yarn test
-      env:
-        CI: true
+      - name: Run the tests and generate coverage report
+        run: yarn test && yarn run test:e2e:run
+        env:
+          CI: true
 
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1

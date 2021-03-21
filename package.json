@@ -5,10 +5,20 @@
     "dev": "blitz dev",
     "build": "blitz build",
     "start": "blitz start",
+    "start-prod-server": "build && start",
     "studio": "blitz prisma studio",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "is-ci-cli \"test:coverage\" \"test:watch\"",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --watch=false --coverage",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --watch --runInBand",
+    "cy:install": "cypress install",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test dev http://localhost:3000/ cy:open",
+    "test:e2e:run": "start-server-and-test start-prod-server http://localhost:8080/ cy:run",
+    "serve": "serve --no-clipboard --single --listen 8811 build",
+    "format": "prettier --write \"**/*.+(js|ts|tsx|json|css|md|mdx|html)\""
   },
   "prisma": {
     "schema": "db/schema.prisma"
@@ -44,10 +54,14 @@
     "zod": "1.11.11"
   },
   "devDependencies": {
+    "@testing-library/cypress": "7.0.4",
     "@types/preview-email": "2.0.0",
     "@types/react": "17.0.3",
+    "cypress": "6.8.0",
     "eslint": "7.22.0",
+    "eslint-plugin-cypress": "2.11.2",
     "husky": "4.3.8",
+    "is-ci-cli": "2.2.0",
     "lint-staged": "10.5.4",
     "prettier": "2.2.1",
     "prettier-plugin-prisma": "0.6.0",
