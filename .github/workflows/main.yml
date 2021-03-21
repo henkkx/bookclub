@@ -25,6 +25,11 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          # Maps TCP port 5432 on service container to the host
+          - 5432:5432
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/bookclub
 
     strategy:
       matrix:
@@ -48,11 +53,7 @@ jobs:
       run: yarn test
       env:
         CI: true
-        # The hostname used to communicate with the PostgreSQL service container
-        POSTGRES_HOST: postgres
-        # The default PostgreSQL port
-        POSTGRES_PORT: 5432
-        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/bookclub
+
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
