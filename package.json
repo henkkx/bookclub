@@ -5,7 +5,7 @@
     "dev": "blitz dev",
     "build": "blitz build",
     "start": "blitz start",
-    "start-prod-server": "build && start",
+    "start-prod-server": "blitz build && blitz start",
     "studio": "blitz prisma studio",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "is-ci-cli \"test:coverage\" \"test:watch\"",
