@@ -5,7 +5,16 @@ import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
 import SearchBox from "app/core/components/SearchBox"
 import { Center, Heading, HStack } from "@chakra-ui/layout"
-import { Box, Button, Img, Input, Stack, Text, useColorModeValue as mode } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  chakra,
+  Img,
+  Input,
+  Stack,
+  Text,
+  useColorModeValue as mode,
+} from "@chakra-ui/react"
 import { HiShieldCheck } from "react-icons/hi"
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -121,9 +130,9 @@ const Home: BlitzPage = () => {
               </Stack>
               <Text mt="8" color={mode("gray.600", "gray.400")}>
                 Already have an account store?{" "}
-                <Link href="#" textDecoration="underline">
+                <chakra.a href="#" textDecoration="underline">
                   Log in
-                </Link>
+                </chakra.a>
               </Text>
             </Box>
             <Box pos="relative" w={{ base: "full", lg: "400px" }} h={{ base: "auto", lg: "370px" }}>

@@ -29,7 +29,7 @@ function Footer() {
     >
       <Stack>
         <Stack direction="row" spacing="4" align="center" justify="space-between">
-          <Logo size="sm" />
+          <Logo isHomePage={isHomePage} size="sm" />
           <ButtonGroup variant="ghost" color="gray.600">
             <IconButton as="a" href="#" aria-label="GitHub" icon={<FaGithub fontSize="20px" />} />
           </ButtonGroup>
