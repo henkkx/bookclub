@@ -3,7 +3,10 @@ import { Link, BlitzPage, useMutation } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
-
+import SearchBox from "app/core/components/SearchBox"
+import { Center, Heading, HStack } from "@chakra-ui/layout"
+import { Box, Button, Img, Input, Stack, Text, useColorModeValue as mode } from "@chakra-ui/react"
+import { HiShieldCheck } from "react-icons/hi"
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
@@ -34,7 +37,7 @@ const UserInfo = () => {
   } else {
     return (
       <>
-        <Link href="/signup">
+        {/* <Link href="/signup">
           <a className="button small">
             <strong>Sign Up</strong>
           </a>
@@ -43,7 +46,7 @@ const UserInfo = () => {
           <a className="button small">
             <strong>Login</strong>
           </a>
-        </Link>
+        </Link> */}
       </>
     )
   }
@@ -51,83 +54,99 @@ const UserInfo = () => {
 
 const Home: BlitzPage = () => {
   return (
-    <div className="container">
-      <main>
-        <div className="logo">
-          <img src="/logo.png" alt="blitz.js" />
-        </div>
-        <p>
-          <strong>Congrats!</strong> Your app is ready, including user sign-up and log-in.
-        </p>
-        <div className="buttons" style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-          <Suspense fallback="Loading...">
-            <UserInfo />
-          </Suspense>
-        </div>
-        <p>
-          <strong>
-            To add a new model to your app, <br />
-            run the following in your terminal:
-          </strong>
-        </p>
-        <pre>
-          <code>blitz generate all project name:string</code>
-        </pre>
-        <div style={{ marginBottom: "1rem" }}>(And select Yes to run prisma migrate)</div>
-        <div>
-          <p>
-            Then <strong>restart the server</strong>
-          </p>
-          <pre>
-            <code>Ctrl + c</code>
-          </pre>
-          <pre>
-            <code>blitz dev</code>
-          </pre>
-          <p>
-            and go to{" "}
-            <Link href="/projects">
-              <a>/projects</a>
-            </Link>
-          </p>
-        </div>
-        <div className="buttons" style={{ marginTop: "5rem" }}>
-          <a
-            className="button"
-            href="https://blitzjs.com/docs/getting-started?utm_source=blitz-new&utm_medium=app-template&utm_campaign=blitz-new"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-          <a
-            className="button-outline"
-            href="https://github.com/blitz-js/blitz"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Github Repo
-          </a>
-          <a
-            className="button-outline"
-            href="https://discord.blitzjs.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Discord Community
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://blitzjs.com?utm_source=blitz-new&utm_medium=app-template&utm_campaign=blitz-new"
-          target="_blank"
-          rel="noopener noreferrer"
+    <main
+      className="container"
+      style={{
+        backgroundImage: "url(/waves.svg)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        minHeight: "100vh",
+      }}
+    >
+      <Box as="section" width="100%" px="3" py="12">
+        <Box
+          maxW={{ base: "xl", md: "5xl" }}
+          maxH={{ md: "xl" }}
+          mx="auto"
+          px={{ base: "6", md: "8" }}
+          textAlign="center"
+          bg={mode("white", "gray.800")}
+          shadow="lg"
+          py="12"
+          rounded="lg"
         >
-          Powered by Blitz.js
-        </a>
-      </footer>
+          <Stack
+            direction={{ base: "column", lg: "row" }}
+            spacing={{ base: "3rem", lg: "2rem" }}
+            mt="8"
+            align={{ lg: "center" }}
+            justify="space-between"
+          >
+            <Box flex="1" maxW={{ lg: "600px" }}>
+              <Heading
+                as="h1"
+                size="3xl"
+                color="gray.800"
+                fontWeight="extrabold"
+                letterSpacing="tight"
+              >
+                Get started with bookclub today
+              </Heading>
+              <Text color="gray.900" mt="4" fontSize="lg" fontWeight="medium">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
+              </Text>
+              <Stack direction={{ base: "column", md: "row" }} spacing="4" mt="8">
+                <Button
+                  size="lg"
+                  minW="210px"
+                  bg="rgb(113, 93, 242)"
+                  color="white"
+                  height="14"
+                  px="8"
+                >
+                  Register
+                </Button>
+                <Button
+                  size="lg"
+                  bg="white"
+                  color="gray.900"
+                  _hover={{ bg: "gray.50" }}
+                  height="14"
+                  px="8"
+                  shadow="base"
+                >
+                  Read more
+                </Button>
+              </Stack>
+              <Text mt="8" color={mode("gray.600", "gray.400")}>
+                Already have an account store?{" "}
+                <Link href="#" textDecoration="underline">
+                  Log in
+                </Link>
+              </Text>
+            </Box>
+            <Box pos="relative" w={{ base: "full", lg: "400px" }} h={{ base: "auto", lg: "370px" }}>
+              <Img
+                w="full"
+                pos="relative"
+                zIndex="1"
+                h={{ lg: "100%" }}
+                objectFit="cover"
+                src="booklover.svg"
+                alt="Reading a book"
+              />
+              <Box pos="absolute" w="100%" h="100%" top="0" left="-4" />
+            </Box>
+          </Stack>
+        </Box>
+      </Box>
+
+      <div className="buttons" style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+        <Suspense fallback="Loading...">
+          <UserInfo />
+        </Suspense>
+      </div>
 
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;700&display=swap");
@@ -146,20 +165,20 @@ const Home: BlitzPage = () => {
           box-sizing: border-box;
         }
         .container {
-          min-height: 100vh;
+          // min-height: 100vh;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          // justify-content: center;
+          // align-items: center;
         }
 
         main {
-          padding: 5rem 0;
+          // padding: 5rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          // justify-content: center;
+          // align-items: center;
         }
 
         main p {
@@ -171,32 +190,13 @@ const Home: BlitzPage = () => {
         }
 
         footer {
-          width: 100%;
-          height: 60px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: #45009d;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer a {
-          color: #f4f4f4;
-          text-decoration: none;
-        }
-
-        .logo {
-          margin-bottom: 2rem;
-        }
-
-        .logo img {
-          width: 300px;
+          // width: 100%;
+          // height: 60px;
+          // border-top: 1px solid #eaeaea;
+          // display: flex;
+          // justify-content: center;
+          // align-items: center;
+          // background-color: #bdb2ff;
         }
 
         .buttons {
@@ -216,9 +216,9 @@ const Home: BlitzPage = () => {
           padding: 0.5rem 1rem;
         }
 
-        .button:hover {
-          background-color: #45009d;
-        }
+        // .button:hover {
+        //   background-color: #45009d;
+        // }
 
         .button-outline {
           border: 2px solid #6700eb;
@@ -227,21 +227,16 @@ const Home: BlitzPage = () => {
           text-align: center;
         }
 
-        .button-outline:hover {
-          border-color: #45009d;
-          color: #45009d;
-        }
+        // .button-outline:hover {
+        //   border-color: #45009d;
+        //   color: #45009d;
+        // }
 
         pre {
           background: #fafafa;
           border-radius: 5px;
           padding: 0.75rem;
           text-align: center;
-        }
-        code {
-          font-size: 0.9rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-            Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
         .grid {
@@ -261,7 +256,7 @@ const Home: BlitzPage = () => {
           }
         }
       `}</style>
-    </div>
+    </main>
   )
 }
 
